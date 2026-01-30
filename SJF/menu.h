@@ -12,7 +12,7 @@ class Dashboard {
         void deleteProcess();
         void listInputProcesses();
         void clearAllProcesses();
-        void displayGanttChart();
+        void displaySchdeulingChart();
         void showAverageWaitingTime();
 };
 

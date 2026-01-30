@@ -18,7 +18,7 @@ void Dashboard::menu() {
         std::cout << "\t2. Delete Process." << std::endl;
         std::cout << "\t3. List Input Processes." << std::endl;
         std::cout << "\t4. Clear All Processes." << std::endl;
-        std::cout << "\t5. Display Gantt Chart." << std::endl;
+        std::cout << "\t5. Display Scheduling Chart." << std::endl;
         std::cout << "\t6. Show Average Waiting Time." << std::endl;
         std::cout << "\t7. Exit." << std::endl;
         std::cout << "CHOOSE THE OPTION: ";
@@ -57,7 +57,7 @@ void Dashboard::menu() {
                 clearAllProcesses();
                 break;
             case 5:
-                displayGanttChart();
+                displaySchdeulingChart();
                 break;
             case 6:
                 showAverageWaitingTime();
@@ -190,7 +190,7 @@ void Dashboard::showAverageWaitingTime() {
     std::cout << "Average Waiting Time: " << scheduler.computeAverageWaitingTime() << " units." << std::endl;
 }
 
-void Dashboard::displayGanttChart() {
+void Dashboard::displaySchdeulingChart() {
     auto& processes = scheduler.getProcesses();
 
     if (processes.empty()) {
@@ -203,28 +203,7 @@ void Dashboard::displayGanttChart() {
         return;
     }
 
-    std::cout << std::endl << "Gantt Chart:" << std::endl;
-
-    std::cout << " ";
-    for (const auto& p : processes)
-        std::cout << std::setw(4) << std::setfill('-') << "-" << std::setfill(' ');
-    std::cout << "\n|";
-
-    for (const auto& p : processes)
-        std::cout << std::setw(3) << p.processID << " |";
-    std::cout << "\n ";
-
-    for (const auto& p : processes)
-        std::cout << std::setw(4) << std::setfill('-') << "-" << std::setfill(' ');
-    std::cout << "\n";
-
-    int currentTime = 0;
-    std::cout << "0";
-    for (const auto& p : processes) {
-        currentTime = p.completionTime;
-        std::cout << std::setw(5) << currentTime;
-    }
-    std::cout << std::endl;
+    std::cout << std::endl << "Schdeuling Chart:" << std::endl;
 
     std::cout << std::endl << "Process Details:" << std::endl;
     std::cout << "------------------------------------------------------------" << std::endl;
@@ -239,6 +218,6 @@ void Dashboard::displayGanttChart() {
                   << p.waitingTime << "\t"
                   << p.turnaroundTime << std::endl;
     }
-    
+
     std::cout << "------------------------------------------------------------" << std::endl;
 }
