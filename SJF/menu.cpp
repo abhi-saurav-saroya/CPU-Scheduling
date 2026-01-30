@@ -4,6 +4,7 @@
 #include <limits>
 #include <string>
 #include <iomanip>
+#include <algorithm>
 
 void Dashboard::menu() {
     while(true) {
@@ -203,21 +204,67 @@ void Dashboard::displaySchdeulingChart() {
         return;
     }
 
-    std::cout << std::endl << "Schdeuling Chart:" << std::endl;
+    // Copy processes and sort by completionTime for display
+    std::vector<Process> execOrder = processes;
+    std::sort(execOrder.begin(), execOrder.end(),
+              [](const Process &a, const Process &b) {
+                  return a.completionTime < b.completionTime;
+              });
 
-    std::cout << std::endl << "Process Details:" << std::endl;
-    std::cout << "------------------------------------------------------------" << std::endl;
-    std::cout << "ID\tArrival\tBurst\tCompletion\tWaiting\tTurnaround" << std::endl;
-    std::cout << "------------------------------------------------------------" << std::endl;
+    // Gantt chart
+    std::cout << std::endl << "Gantt Chart:" << std::endl;
+    std::cout << " ";
+    for (const auto& p : execOrder)
+        std::cout << std::setw(4) << std::setfill('-') << "-" << std::setfill(' ');
+    std::cout << "\n|";
+    for (const auto& p : execOrder)
+        std::cout << std::setw(3) << p.processID << " |";
+    std::cout << "\n ";
+    for (const auto& p : execOrder)
+        std::cout << std::setw(4) << std::setfill('-') << "-" << std::setfill(' ');
+    std::cout << "\n";
 
-    for (const auto& p : processes) {
-        std::cout << p.processID << "\t"
-                  << p.arrivalTime << "\t"
-                  << p.burstTime << "\t"
-                  << p.completionTime << "\t"
-                  << p.waitingTime << "\t"
-                  << p.turnaroundTime << std::endl;
+    // Timeline below Gantt
+    int currentTime = 0;
+    std::cout << "0";
+    for (const auto& p : execOrder) {
+        currentTime = p.completionTime;
+        std::cout << std::setw(5) << currentTime;
     }
+    std::cout << "\n\n";
 
-    std::cout << "------------------------------------------------------------" << std::endl;
+    // Table header
+    std::cout << "Process Execution Details:" << std::endl;
+    std::cout << "-------------------------------------------------------------" << std::endl;
+    std::cout << std::left 
+              << std::setw(6) << "ID" 
+              << std::setw(8) << "Arrival" 
+              << std::setw(6) << "Burst" 
+              << std::setw(8) << "Start" 
+              << std::setw(12) << "Completion" 
+              << std::setw(8) << "Waiting" 
+              << "Turnaround" << std::endl;
+    std::cout << "-------------------------------------------------------------" << std::endl;
+
+    // Compute start time for table
+    int time = 0;
+    for (const auto& p : execOrder) {
+        int startTime = std::max(time, p.arrivalTime);
+        int waitingTime = startTime - p.arrivalTime;
+        int turnaroundTime = waitingTime + p.burstTime;
+        int completionTime = startTime + p.burstTime;
+
+        std::cout << std::left
+                  << std::setw(6) << p.processID
+                  << std::setw(8) << p.arrivalTime
+                  << std::setw(6) << p.burstTime
+                  << std::setw(8) << startTime
+                  << std::setw(12) << completionTime
+                  << std::setw(8) << waitingTime
+                  << turnaroundTime
+                  << std::endl;
+
+        time = completionTime;
+    }
+    std::cout << "-------------------------------------------------------------" << std::endl;
 }
