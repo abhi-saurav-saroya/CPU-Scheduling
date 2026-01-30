@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Non-Preemptive SJF CPU Scheduling</title>
     <link rel="stylesheet" href="README.css">
 </head>
 <body>
