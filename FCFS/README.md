@@ -1,15 +1,15 @@
 <h1 align="center">
   <img 
-    src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=32&pause=1000&color=ffffff&center=true&vCenter=true&width=650&lines=Non-Preemptive+SJF+CPU+Scheduling"
-    alt="Shortest Job First (SJF) CPU Scheduling"
+    src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=32&pause=1000&color=ffffff&center=true&vCenter=true&width=650&lines=Non-Preemptive+FCFS+CPU+Scheduling"
+    alt="First Come First Serve (FCFS) CPU Scheduling"
   />
 </h1>
 
-> A console-based simulation of the **Non-Preemptive Shortest Job First (SJF)** CPU scheduling algorithm, written in modern **C++**, with a clean separation between UI (Dashboard) and Scheduling Logic.
+> A console-based simulation of the **Non-Preemptive First Come First Serve (FCFS)** CPU scheduling algorithm, written in modern **C++**, with a clean separation between UI (Dashboard) and Scheduling Logic.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" alt="C++"/>
-  <img src="https://img.shields.io/badge/CPU_Scheduling-SJF-0ea5e9?style=for-the-badge" alt="SJF"/>
+  <img src="https://img.shields.io/badge/CPU_Scheduling-FCFS-0ea5e9?style=for-the-badge" alt="FCFS"/>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Type-Non--Preemptive-22c55e?style=for-the-badge" alt="Non Preemptive"/>
@@ -21,7 +21,7 @@
 
 ## What This Project Does
 - Accepts multiple processes with arrival time and burst time
-- Schedules them using **Non-Preemptive SJF**
+- Schedules them using **Non-Preemptive FCFS**
 - Displays a readable **Gantt Chart**
 - Computes:
     - Completion Time
@@ -30,13 +30,13 @@
     - Average Waiting Time
 - Fully menu-driven and interactive
 
-## SJF Directory Structure
+## FCFS Directory Structure
 ```bash
-SJF/
- │
- ├── main.cpp              → Program entry point
- ├── menu.h / menu.cpp     → Dashboard (UI + user interaction)
- ├── SJF.h / SJF.cpp       → Core scheduling logic
+FCFS/
+  │
+  ├── main.cpp              → Program entry point
+  ├── menu.h / menu.cpp     → Dashboard (UI + user interaction)
+  ├── FCFS.h / FCFS.cpp     → Core scheduling logic
 ```
 
 
@@ -66,27 +66,28 @@ ID    Arrival   Burst
 ## Sample Output
 ```
 Gantt Chart:
-| 001 | 003 | 002 |
-0     20    22    27
+| 001 | 002 | 003 |
+0     20    25    27
+
 
 Process Execution Details:
 ID    Arrival Burst Start Completion Waiting Turnaround
 001   0       20    0     20          0       20
-003   6       2     20    22          14      16
-002   2       5     22    27          20      25
+002   2       5     20    25          18      23
+003   6       2     25    27          19      21
 ```
 
 ## Compilation & Execution
 ```
-g++ *.cpp -o sjf
-./sjf
+g++ *.cpp -o FCFS
+.\FCFS
 ```
-Compile from the directory containing all .cpp  files.
+> NOTE: Compile from the directory containing all .cpp  files.
 
 ## Features Implemented
 
 - CRUD operations on processes
-- Non-preemptive SJF scheduling
+- Non-preemptive FCFS scheduling
 - Gantt chart visualization
 - Average waiting time calculation
 - Clean formatting & validation
@@ -97,14 +98,9 @@ Compile from the directory containing all .cpp  files.
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" alt="Footer"/>
 
-<br>
-
 <i>Built as a learning project for Operating Systems and C++ fundamentals. Designed with modularity and clarity in mind.</i>
 
 
-<br>
-
 ---
 
-**© 2025 Open Source Project | SJF Scheduling Simulation | MIT License**
-
+**© 2026 Open Source Project | FCFS Scheduling Simulation | MIT License**
